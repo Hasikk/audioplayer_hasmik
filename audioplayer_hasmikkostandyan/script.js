@@ -53,3 +53,53 @@ function playOrPauseSong(){
         play.src='images/play-button-arrowhead.png'
     }
 }
+
+song.addEventListener('timeupdate',function(){
+    // console.log(song.currentTime)
+    // console.log(song.duration)
+    let fill=document.getElementsByClassName('fill')
+    let position=song.currentTime/song.duration
+    fill[0].style.marginLeft=position*100+'%'
+    convertTime(song.currentTime)
+    if (song.ended){
+        next()
+    }
+})
+
+function convertTime(seconds){
+    currentTime=document.getElementsByClassName('currentTime')
+    let min=Math.floor(seconds/60)
+    let sec=Math.floor(seconds%60)
+
+    min=(min<10) ? "0"+min:min
+    sec=(sec<10) ? "0"+sec:sec
+    currentTime[0].textContent=min+':'+sec
+
+    totalTime(song.duration)
+}   
+
+
+function totalTime(seconds){
+    let min=Math.floor(seconds/60)
+    let sec=Math.floor(seconds%60)
+    min=(min<10) ? "0"+min:min
+    sec=(sec<10) ? "0"+sec:sec
+    currentTime[0].textContent+=" / "+min+':'+sec
+}
+
+
+function prev(){
+    currentSong-=1
+    if(currentSong<0){
+        currentSong=data.song.length-1
+    }
+    playSong()
+}
+
+function next(){
+    currentSong+=1
+    if(currentSong>=data.song.length){
+        currentSong=0
+    }
+    playSong()
+}
