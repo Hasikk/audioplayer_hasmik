@@ -59,7 +59,7 @@ song.addEventListener('timeupdate',function(){
     // console.log(song.duration)
     let fill=document.getElementsByClassName('fill')
     let position=song.currentTime/song.duration
-    fill[0].style.marginLeft=position*100+'%'
+    fill[0].style.width=position*100+'%'
     convertTime(song.currentTime)
     if (song.ended){
         next()
@@ -103,3 +103,72 @@ function next(){
     }
     playSong()
 }
+
+let mutes=document.getElementById('mute')
+function mute(){
+    if (song.muted){
+        song.muted=false
+        mutes.src='images/volume.png'
+    }else{
+        song.muted=true
+        mutes.src='images/volume-mute.png'
+    }
+
+}
+
+function decrease(){
+    song.volume-=0.2
+    if (song.volume<=0.2){
+        song.volume=0
+        mutes.src='images/volume-mute.png'
+    }
+}
+
+function increase(){
+    song.volume+=0.2
+    // if (song.volume>0.2){
+    //     song.volume=0
+    //     mutes.src='images/volume.png'
+    // }
+}
+
+
+function seekTo(event) {
+    const fill = document.querySelector('.fill');
+    const handle = document.querySelector('.handle');
+    const seekBar = document.querySelector('.seek-bar');
+
+    const seekWidth = seekBar.offsetWidth;
+    const seekBarRect = seekBar.getBoundingClientRect();
+    const fillWidth = event.clientX - seekBarRect.left;
+    const newPosition = fillWidth / seekWidth;
+
+    const newTime = newPosition * song.duration;
+    song.currentTime = newTime;
+
+    fill.style.width = newPosition * 100 + '%';
+    handle.style.left = newPosition * 100 + '%';
+
+    convertTime(newTime);
+}
+
+
+function searchSong() {
+    let searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    let matchingIndexes = [];
+    for (let i = 0; i < data.title.length; i++) {
+        if (data.title[i].toLowerCase().includes(searchTerm)) {
+            matchingIndexes.push(i);
+        }
+    }
+    if (matchingIndexes.length > 0) {
+        currentSong = matchingIndexes[0];
+        playSong();
+        play.src='images/pause.png'
+        
+    } else {
+        alert('No matching song found!');
+    }
+}
+
+
