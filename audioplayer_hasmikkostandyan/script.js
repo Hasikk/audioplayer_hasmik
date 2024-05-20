@@ -96,12 +96,43 @@ function prev(){
     playSong()
 }
 
+let shuff=false
+let shuffle = document.getElementById("shuffleButton")
+
+shuffle.addEventListener('click',function(){
+    shuff=true
+   
+    
+
+})
+
+let flag  = false
+let repeat = document.getElementById("repeatButton")
+repeat.addEventListener("click",function(){
+flag = true
+
+
+
+    console.log(flag);
+})
+
+
 function next(){
     currentSong+=1
-    if(currentSong>=data.song.length){
+    if(flag == true){
+        currentSong = currentSong-1
+    }else if(shuff == true){
+        currentSong = Math.floor(Math.random() * data.song.length);
+    }
+    else  if(currentSong>=data.song.length){
+
         currentSong=0
     }
     playSong()
+
+
+
+
 }
 
 let mutes=document.getElementById('mute')
@@ -126,10 +157,9 @@ function decrease(){
 
 function increase(){
     song.volume+=0.2
-    // if (song.volume>0.2){
-    //     song.volume=0
-    //     mutes.src='images/volume.png'
-    // }
+    if (song.volume>0.2){
+        mutes.src='images/volume.png'
+    }
 }
 
 
@@ -170,5 +200,8 @@ function searchSong() {
         alert('No matching song found!');
     }
 }
+
+
+
 
 
