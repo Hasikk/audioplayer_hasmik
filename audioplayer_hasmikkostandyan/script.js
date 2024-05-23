@@ -29,6 +29,7 @@ window.onload=function(){
     playSong()
 }
 
+
 currentSong=0
 
 function playSong(){
@@ -90,6 +91,16 @@ function totalTime(seconds){
 
 function prev(){
     currentSong-=1
+    if(flag == true){
+        currentSong = currentSong-1
+    }if(shuff == true){
+        currentSong = Math.floor(Math.random() * data.song.length);
+    }
+    if (sorted==true){
+        
+    }  if(currentSong>=data.song.length){
+        currentSong=0
+    }
     if(currentSong<0){
         currentSong=data.song.length-1
     }
@@ -98,40 +109,46 @@ function prev(){
 
 let shuff=false
 let shuffle = document.getElementById("shuffleButton")
+let sorted=true
+let sort = document.getElementById("sortButton")
+let flag  = false
+let repeat = document.getElementById("repeatButton")
+
 
 shuffle.addEventListener('click',function(){
     shuff=true
-   
-    
-
+    flag=false
+    sorted=false
 })
 
-let flag  = false
-let repeat = document.getElementById("repeatButton")
+
 repeat.addEventListener("click",function(){
 flag = true
-
-
-
-    console.log(flag);
+shuff=false
+sorted=false
 })
 
+
+sort.addEventListener("click",function(){
+    flag = false
+    shuff=false
+    sorted=true
+    })
+    
 
 function next(){
     currentSong+=1
     if(flag == true){
         currentSong = currentSong-1
-    }else if(shuff == true){
+    }if(shuff == true){
         currentSong = Math.floor(Math.random() * data.song.length);
     }
-    else  if(currentSong>=data.song.length){
+    if (sorted==true){
 
+    }  if(currentSong>=data.song.length){
         currentSong=0
     }
     playSong()
-
-
-
 
 }
 
@@ -200,8 +217,4 @@ function searchSong() {
         alert('No matching song found!');
     }
 }
-
-
-
-
 
