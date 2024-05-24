@@ -24,11 +24,11 @@ let data={
     ]
 }
 
-let song=new Audio()
 window.onload=function(){
     playSong()
 }
 
+let song = new Audio()
 
 currentSong=0
 
@@ -218,3 +218,34 @@ function searchSong() {
     }
 }
 
+function changeSpeed(speed) {
+    song.playbackRate = speed;
+}
+
+
+// Function to add a new song to the playlist
+function addSong() {
+    // Get input values
+    let title = document.getElementById('songTitle').value;
+    let poster = document.getElementById('posterURL').value;
+    let song = document.getElementById('songURL').value;
+    
+    // Check if all fields are filled
+    if (title && poster && song) {
+        // Add the new song data to the existing data object
+        data.title.push(title);
+        data.poster.push(poster);
+        data.song.push(song);
+        
+        // Call the function to repopulate the playlist
+        populatePlaylist();
+        
+        // Clear input fields
+        document.getElementById('songTitle').value = '';
+        document.getElementById('posterURL').value = '';
+        document.getElementById('songURL').value = '';
+    } else {
+        // Alert the user if any field is empty
+        alert('Please fill in all fields.');
+    }
+}

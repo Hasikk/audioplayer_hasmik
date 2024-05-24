@@ -12,16 +12,39 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <input type="text" id="searchInput" placeholder="Search for a song...">
      <button onclick="searchSong()">Search</button>
 
+
+     <div class="dropdown">
+        <button class="dropbtn">Speed <i class="bi bi-caret-down"></i></button>
+        <div class="dropdown-content">
+            <a href="#" onclick="changeSpeed(0.5)">0.5x</a>
+            <a href="#" onclick="changeSpeed(0.75)">0.75x</a>
+            <a href="#" onclick="changeSpeed(1)">1x</a>
+            <a href="#" onclick="changeSpeed(1.25)">1.25x</a>
+            <a href="#" onclick="changeSpeed(1.5)">1.5x</a>
+            <a href="#" onclick="changeSpeed(2)">2x</a>
+        </div>
+    </div>
+
+    <!-- Add a form for visitors to input song details -->
+<form id="addSongForm">
+    <input type="text" id="songTitle" placeholder="Song Title">
+    <input type="text" id="posterURL" placeholder="Poster URL">
+    <input type="text" id="songURL" placeholder="Song URL">
+    <button type="button" onclick="addSong()">Add Song</button>
+</form>
+
+</div>
     <div class="main">
         
     </div>
     
     <div class="player">
-        <div class="row1"></div>
+        <div class="row1">
+            
+        </div>
         <div id="songtitle">Title</div>
         <div class="row2">
             <div class="play">
@@ -37,18 +60,16 @@
             <div class="mute">
                 <div class="currentTime">00 : 00 / 00 : 00</div>
                 <div class="controls">
+    
                     <button id="shuffleButton" onclick=""><i class="bi bi-shuffle"></i></button>
                     <button id="repeatButton" onclick=""><i class="bi bi-repeat-1"></i></button>
                     <button id="sortButton" onclick=""><i class="bi bi-filter-square"></i></button>
-                </div>
+
                 <div class="muteButtons">
                     <img src="images/volume-down.png" id="decrease" onclick="decrease()" alt="">
                     <img src="images/volume.png" id="mute" onclick="mute()" alt="">
                     <img src="images/increase-volume.png" id="increase" onclick="increase()" alt="">
                 </div>
-                
-                
-
 
             </div>
         </div>
